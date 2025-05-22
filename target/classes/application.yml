@@ -1,0 +1,57 @@
+# server configuration
+server:
+  port: ${PORT:9191}
+  error:
+    whitelabel:
+      enabled: "true"
+  servlet:
+    contextPath: "/"
+  
+hostconfig:
+  host: "localhost"
+  protocol: "http"
+
+allowed:
+  origins: http://localhost:2375, http://localhost:8080, http://localhost:8084, null
+  # headers: Content-Type,Authorization,loggedInUserId,Cache-Control,Pragma,Expires
+
+jwt:
+  secret: "sr-3zf#x6czf2m(dk6@&_c*aj6^sdr&*wsw0a%adgn*nh1)%*s"
+  expiration: ""
+
+# database configuration
+spring:
+  flyway:
+    baselineOnMigrate: true
+    enabled: false
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: "none" #create-drop
+      dialect: "org.hibernate.dialect.MySQL8Dialect"
+      spring.jpa.hibernate.use-new-id-generator-mappings: false
+    properties:
+      hibernate:        
+        format_sql: false
+  
+  datasource:
+    url: "jdbc:mysql://localhost:3306/openemr"
+    username: "root"
+    password: ""
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+  
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      liveness:
+        enabled: true
+      readiness:
+        enabled: true
+        
+logging:
+  level:
+    ROOT: ERROR
